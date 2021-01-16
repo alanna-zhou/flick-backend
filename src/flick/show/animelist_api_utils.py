@@ -40,8 +40,11 @@ class AnimeList_API:
         """
         Search anime by the mal_id from animelist API, returns a list of anime ids.
         """
-        anime_info_lst = jikan.search("anime", name, page=1).get("results")
-        return [self.get_anime_from_animelist_info(anime) for anime in anime_info_lst]
+        try:
+            anime_info_lst = jikan.search("anime", name, page=1).get("results")
+            return [self.get_anime_from_animelist_info(anime) for anime in anime_info_lst]
+        except:
+            return []
 
     def search_anime_by_year(self, year, season):
         """
